@@ -10,10 +10,6 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.lightBlueAccent,
-          child: Icon(Icons.settings),
-          onPressed: () {}),
       body: GameWidget(),
     );
   }
@@ -34,7 +30,7 @@ class GameWidgetState extends State<GameWidget> {
   final double cellPadding = 5.0;
   final EdgeInsets _gameMargin = EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0);
   bool _isDragging = false;
-  bool _isGameOver = false;
+  bool _isGameOver = false; //cause the game is never over!
   int bestScore = 0;
 
   @override
@@ -123,7 +119,8 @@ class GameWidgetState extends State<GameWidget> {
             },
             gradient: LinearGradient(colors: [
               Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
+//              Color.fromRGBO(52, 138, 199, 1.0)
+              Color.fromRGBO(52, 212, 212, 1.0)
             ]),
           )
         ],
@@ -143,117 +140,164 @@ class GameWidgetState extends State<GameWidget> {
     List<Widget> children = List<Widget>();
     children.add(BoardGridWidget(this));
     children.addAll(_cellWidget);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: mainOffColor,
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                child: Container(
-                  width: 130.0,
-                  height: 60.0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Score：',
-                      ),
-                      Text(
-                        _game.score.toString(),
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              FlatButton(
-                padding: EdgeInsets.all(0.0),
-                child: Container(
-                  width: 130.0,
-                  height: 60.0,
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.blue, Colors.greenAccent])),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
                   decoration: BoxDecoration(
+                    //color: mainOffColor,
+//                    gradient: LinearGradient(colors: [
+//                      Colors.blue[700],
+//                      Colors.greenAccent,
+//                    ]),
+                    color: Colors.blueGrey,
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    border: Border.all(
-                      color: kMainColor,
+                  ),
+                  child: Container(
+                    width: 130.0,
+                    height: 60.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Best',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          bestScore.toString(),
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Center(
-                    child: Text(bestScore.toString()),
-//                    child: Text('New Game'),
-                  ),
                 ),
-                onPressed: () {
-                  newGame();
-                },
-              ),
-            ],
-          ),
-        ),
-        Container(
-          height: 50.0,
-          child: Opacity(
-            opacity: _isGameOver ? 1.0 : 0.0,
-            child: Center(
-              child: Text("Game Over!",
-                  style: TextStyle(
-                    fontSize: 24.0,
-                  )),
+                FlatButton(
+                  padding: EdgeInsets.all(0.0),
+                  child: Container(
+                    width: 180.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+//                      gradient: LinearGradient(
+//                          colors: [Colors.blue[700], Colors.greenAccent]),
+                      color: Colors.blueGrey,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'New Game',
+                        style: TextStyle(
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    newGame();
+                  },
+                ),
+              ],
             ),
           ),
-        ),
-        Container(
-            margin: _gameMargin,
-            width: _queryData.size.width,
-            height: _queryData.size.width,
-            child: GestureDetector(
-              onVerticalDragUpdate: (detail) {
-                if (detail.delta.distance == 0 || _isDragging) {
-                  return;
-                }
-                _isDragging = true;
-                if (detail.delta.direction > 0) {
-                  moveDown();
-                } else {
-                  moveUp();
-                }
-              },
-              onVerticalDragEnd: (detail) {
-                _isDragging = false;
-              },
-              onVerticalDragCancel: () {
-                _isDragging = false;
-              },
-              onHorizontalDragUpdate: (detail) {
-                if (detail.delta.distance == 0 || _isDragging) {
-                  return;
-                }
-                _isDragging = true;
-                if (detail.delta.direction > 0) {
-                  moveLeft();
-                } else {
-                  moveRight();
-                }
-              },
-              onHorizontalDragDown: (detail) {
-                _isDragging = false;
-              },
-              onHorizontalDragCancel: () {
-                _isDragging = false;
-              },
-              child: Stack(
-                children: children,
-              ),
-            )),
-      ],
+          Container(
+            margin: const EdgeInsets.only(
+              top: 15.0,
+              bottom: 25.0,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+//              gradient: LinearGradient(colors: [
+////                Color.fromRGBO(116, 116, 191, 1.0),
+////                Color.fromRGBO(52, 212, 212, 1.0)
+//                Colors.blue[700],
+//                Colors.greenAccent
+//              ]),
+              color: Colors.blueGrey,
+            ),
+            width: 130.0,
+            height: 60.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Score',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  _game.score.toString(),
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+              margin: _gameMargin,
+              width: _queryData.size.width,
+              height: _queryData.size.width,
+              child: GestureDetector(
+                onVerticalDragUpdate: (detail) {
+                  if (detail.delta.distance == 0 || _isDragging) {
+                    return;
+                  }
+                  _isDragging = true;
+                  if (detail.delta.direction > 0) {
+                    moveDown();
+                  } else {
+                    moveUp();
+                  }
+                },
+                onVerticalDragEnd: (detail) {
+                  _isDragging = false;
+                },
+                onVerticalDragCancel: () {
+                  _isDragging = false;
+                },
+                onHorizontalDragUpdate: (detail) {
+                  if (detail.delta.distance == 0 || _isDragging) {
+                    return;
+                  }
+                  _isDragging = true;
+                  if (detail.delta.direction > 0) {
+                    moveLeft();
+                  } else {
+                    moveRight();
+                  }
+                },
+                onHorizontalDragDown: (detail) {
+                  _isDragging = false;
+                },
+                onHorizontalDragCancel: () {
+                  _isDragging = false;
+                },
+                child: Stack(
+                  children: children,
+                ),
+              )),
+        ],
+      ),
     );
   }
 

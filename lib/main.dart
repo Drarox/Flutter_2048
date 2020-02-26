@@ -5,7 +5,7 @@ import 'package:flutter2048/constants.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override aad
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: KAppTitle,

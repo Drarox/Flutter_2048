@@ -18,7 +18,7 @@ class BoardGridWidget extends StatelessWidget {
           left: c * width + _state.cellPadding * (c + 1),
           top: r * width + _state.cellPadding * (r + 1),
           size: width,
-          color: Colors.grey[300],
+          color: Colors.blueGrey[100],
         );
         _backgroundBox.add(box);
       }
@@ -30,7 +30,7 @@ class BoardGridWidget extends StatelessWidget {
           width: _state.boardSize().width,
           height: _state.boardSize().height,
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: Colors.blueGrey,
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
           child: Stack(
