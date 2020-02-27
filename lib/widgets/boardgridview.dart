@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2048/screens/game_screen.dart';
 import 'package:flutter2048/widgets/cellbox.dart';
+import 'package:flutter2048/constants.dart';
 
 class BoardGridWidget extends StatelessWidget {
   final GameWidgetState _state;
@@ -18,7 +19,8 @@ class BoardGridWidget extends StatelessWidget {
           left: c * width + _state.cellPadding * (c + 1),
           top: r * width + _state.cellPadding * (r + 1),
           size: width,
-          color: Colors.blueGrey[100],
+//            color: Colors.blueGrey[100],
+          color: cellBoxColor,
         );
         _backgroundBox.add(box);
       }
@@ -30,7 +32,7 @@ class BoardGridWidget extends StatelessWidget {
           width: _state.boardSize().width,
           height: _state.boardSize().height,
           decoration: BoxDecoration(
-            color: Colors.blueGrey,
+            color: borderColor, //Colors.blueGrey,
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
           child: Stack(

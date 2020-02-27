@@ -103,7 +103,7 @@ class GameWidgetState extends State<GameWidget> {
           DialogButton(
             child: Text(
               "Close",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: dialogTextStyle,
             ),
             onPressed: () => Navigator.pop(context),
             width: 120,
@@ -111,17 +111,13 @@ class GameWidgetState extends State<GameWidget> {
           DialogButton(
             child: Text(
               "New Game",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: dialogTextStyle,
             ),
             onPressed: () {
               newGame();
               Navigator.pop(context);
             },
-            gradient: LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-//              Color.fromRGBO(52, 138, 199, 1.0)
-              Color.fromRGBO(52, 212, 212, 1.0)
-            ]),
+            gradient: buttonGradient,
           )
         ],
       ).show();
@@ -142,26 +138,34 @@ class GameWidgetState extends State<GameWidget> {
     children.addAll(_cellWidget);
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.blue, Colors.greenAccent])),
+        gradient: backgroundGradient,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(
+              top: 30.0,
+              bottom: 20.0,
+            ),
+            child: Text(
+              '2048',
+              style: titleTextStyle,
+            ),
+          ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 15.0,
+                  ),
                   decoration: BoxDecoration(
-                    //color: mainOffColor,
-//                    gradient: LinearGradient(colors: [
-//                      Colors.blue[700],
-//                      Colors.greenAccent,
-//                    ]),
-                    color: Colors.blueGrey,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    color: boxBackground,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
                   ),
                   child: Container(
                     width: 130.0,
@@ -170,90 +174,84 @@ class GameWidgetState extends State<GameWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Best',
+                          'Score',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: textColor,
                           ),
                         ),
                         Text(
-                          bestScore.toString(),
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          _game.score.toString(),
+                          style: boxTextStyle,
                         ),
                       ],
                     ),
                   ),
                 ),
-                FlatButton(
-                  padding: EdgeInsets.all(0.0),
-                  child: Container(
-                    width: 180.0,
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-//                      gradient: LinearGradient(
-//                          colors: [Colors.blue[700], Colors.greenAccent]),
-                      color: Colors.blueGrey,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'New Game',
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 15.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    color: boxBackground,
+                  ),
+                  width: 130.0,
+                  height: 60.0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Best',
                         style: TextStyle(
-                          fontSize: 26.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: textColor,
                         ),
                       ),
+                      Text(
+                        bestScore.toString(),
+                        style: boxTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+//            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Spacer(
+                flex: 20,
+              ),
+              FlatButton(
+                padding: EdgeInsets.all(0.0),
+                child: Container(
+                  width: 80.0,
+                  height: 60.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    color: boxBackground,
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.refresh,
+                      color: textColor,
+                      size: 42,
                     ),
                   ),
-                  onPressed: () {
-                    newGame();
-                  },
                 ),
-              ],
-            ),
+                onPressed: () {
+                  newGame();
+                },
+              ),
+              Spacer(
+                flex: 3,
+              ),
+            ],
           ),
           Container(
-            margin: const EdgeInsets.only(
-              top: 15.0,
-              bottom: 25.0,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-//              gradient: LinearGradient(colors: [
-////                Color.fromRGBO(116, 116, 191, 1.0),
-////                Color.fromRGBO(52, 212, 212, 1.0)
-//                Colors.blue[700],
-//                Colors.greenAccent
-//              ]),
-              color: Colors.blueGrey,
-            ),
-            width: 130.0,
-            height: 60.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Score',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  _game.score.toString(),
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
+              padding: EdgeInsets.only(
+                top: 15.0,
+              ),
               margin: _gameMargin,
               width: _queryData.size.width,
               height: _queryData.size.width,
