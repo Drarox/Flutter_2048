@@ -28,7 +28,6 @@ class GameWidgetState extends State<GameWidget> {
   final int row = 4;
   final int column = 4;
   final double cellPadding = 5.0;
-  final EdgeInsets _gameMargin = EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0);
   bool _isDragging = false;
   bool _isGameOver = false; //cause the game is never over!
   int bestScore = 0;
@@ -117,7 +116,7 @@ class GameWidgetState extends State<GameWidget> {
               newGame();
               Navigator.pop(context);
             },
-            gradient: buttonGradient,
+            gradient: backgroundGradient,
           )
         ],
       ).show();
@@ -216,44 +215,33 @@ class GameWidgetState extends State<GameWidget> {
               ],
             ),
           ),
-          Row(
-//            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Spacer(
-                flex: 20,
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Container(
+              width: 80.0,
+              height: 60.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                color: boxBackground,
               ),
-              FlatButton(
-                padding: EdgeInsets.all(0.0),
-                child: Container(
-                  width: 80.0,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    color: boxBackground,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.refresh,
-                      color: textColor,
-                      size: 42,
-                    ),
-                  ),
+              child: Center(
+                child: Icon(
+                  Icons.refresh,
+                  color: textColor,
+                  size: 42,
                 ),
-                onPressed: () {
-                  newGame();
-                },
               ),
-              Spacer(
-                flex: 3,
-              ),
-            ],
+            ),
+            onPressed: () {
+              newGame();
+            },
           ),
           Container(
               padding: EdgeInsets.only(
-                top: 15.0,
+                top: 20.0,
               ),
-              margin: _gameMargin,
-              width: _queryData.size.width,
+              margin: gameMargin,
+              width: boardSize().width, //_queryData.size.width,
               height: _queryData.size.width,
               child: GestureDetector(
                 onVerticalDragUpdate: (detail) {
@@ -302,7 +290,11 @@ class GameWidgetState extends State<GameWidget> {
   Size boardSize() {
     assert(_queryData != null);
     Size size = _queryData.size;
-    num width = size.width - _gameMargin.left - _gameMargin.right;
+    num width = size.width - gameMargin.left - gameMargin.right;
+    double ratio = size.width / size.height;
+    if (ratio > 0.75) {
+      width = size.height / 2;
+    }
     return Size(width, width);
   }
 }

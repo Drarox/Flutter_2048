@@ -49,3 +49,5 @@ final titleTextStyle = TextStyle(
 final cellBoxColor = Color.fromRGBO(207, 216, 220, 0.5);
 
 final borderColor = Color.fromRGBO(96, 125, 139, 0.75);
+
+final EdgeInsets gameMargin = EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0);
