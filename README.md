@@ -26,8 +26,8 @@ Simply just swipe (Up, Down, Left or Right) to move the tiles, you can merge til
 
 ## Screenshots
 
-![2048](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen1.png "2048 Game")  ![2048](https://raw.
-githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen2.png "2048 Game")
+![2048](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen1.png "2048 Game")
+![2048](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen2.png "2048 Game")
 
 ## License
 
