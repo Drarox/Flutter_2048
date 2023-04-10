@@ -14,11 +14,11 @@ Simple 2048 game made with Flutter for iOS, Android and Web.
 
 Get the app on the playstore :
 
-- [![GooglePlay](https://yannick-burkard.com/wp-content/uploads/2020/02/Google-play-store-icon-300x112.png)](https://play.google.com/store/apps/details?id=com.yannickburkard.flutter2048)
+[![GooglePlay](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.yannickburkard.flutter2048)
 
 Web version :
 
-- [![Webapp](https://yannick-burkard.com/wp-content/uploads/2020/02/webappBadge-300x89.png)](https://yannick-burkard.com/flutter2048/#/)
+[![Webapp](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/web-badge-v1.png)](https://yannick-burkard.com/flutter2048/#/)
 
 ## How to play :
 
@@ -26,7 +26,8 @@ Simply just swipe (Up, Down, Left or Right) to move the tiles, you can merge til
 
 ## Screenshots
 
-![2048](https://yannick-burkard.com/wp-content/uploads/2020/02/Screenshot_20200227-115654-510x1024.jpg "2048 Game") - ![2048](https://yannick-burkard.com/wp-content/uploads/2020/02/Screenshot_20200227-115237-510x1024.jpg "2048 Game")
+![2048](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen1.png "2048 Game")  ![2048](https://raw.
+githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/screen2.png "2048 Game")
 
 ## License
 
