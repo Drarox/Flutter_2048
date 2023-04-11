@@ -18,7 +18,7 @@ Get the app on the playstore :
 
 Web version :
 
-[![Webapp](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/web-badge-v1.png)](https://yannick-burkard.com/flutter2048/#/)
+[![Webapp](https://raw.githubusercontent.com/Drarox/Flutter_2048/master/metadata/images/web-badge-v1.png)](https://flutter2048.yannick-burkard.eu.org/#/)
 
 ## How to play :
 
