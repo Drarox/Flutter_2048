@@ -215,8 +215,8 @@ class GameWidgetState extends State<GameWidget> {
               ],
             ),
           ),
-          FlatButton(
-            padding: EdgeInsets.all(0.0),
+          TextButton(
+            //padding: EdgeInsets.all(0.0),
             child: Container(
               width: 80.0,
               height: 60.0,
